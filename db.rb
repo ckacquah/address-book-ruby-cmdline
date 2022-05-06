@@ -1,8 +1,6 @@
-
 require 'json'
-require_relative 'config/init'
-require_relative 'models/contact'
-
+require_relative 'config'
+require_relative 'contact'
 
 module Database
 
@@ -28,18 +26,20 @@ module Database
 
   def self.write_contacts_to_file(contacts)
     File.open(DB_PATH, "w") do |file|
-      file.write(JSON.pretty_generate({'contacts': contacts}))
+      file.write(JSON.pretty_generate({ 'contacts': contacts }))
     end
   end
 end
-
-
 
 class ContactDatabase
   attr_reader :contacts
 
   def initialize
     @contacts = Database::read_contacts_from_file()
+  end
+
+  def get_all_contacts
+    @contacts
   end
 
   def read(index)
@@ -60,5 +60,4 @@ class ContactDatabase
     @contacts.delete_at(index)
     Database::write_contacts_to_file(@contacts)
   end
-
 end
