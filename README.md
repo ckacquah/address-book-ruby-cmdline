@@ -8,31 +8,26 @@ all the operations.
 
 The first step is to install the dependencies. You need ruby and gem installed to the the application
 
-```console
+```sh
 $ gem install colorize dotenv
 ```
 
 After installing the all the dependencies, run the following command
 
-```console
+```sh
 $ mv .env.example .env
 ```
 
 You can edit the file *.env* file to point to another database file.
 
-<div class="panel panel-info">
-NOTE
-<div class="panel-body">
-The database file must exist. It should also contain valid json data.
-</div>
-</div>
+> :warning: **The database file must exist. It should also contain valid json data.**
 
-```dotenv
+```sh
 DB_PATH="db.example.json"
 ```
 
 Finally to run the application
 
-```console
+```sh
 $ ruby main.rb
 ```
