@@ -1,4 +1,3 @@
 require_relative 'app'
 
-app = ContactApplication.new
-app.start
+AddressBookApplication.new.start

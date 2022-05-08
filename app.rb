@@ -17,7 +17,7 @@ require_relative 'controllers/edit'
 require_relative 'controllers/view'
 require_relative 'controllers/delete'
 
-class ContactApplication
+class AddressBookApplication
 
   attr_reader :routes, :router, :db
 
