@@ -13,7 +13,7 @@ class DeleteContactController < Controller
       puts "Contact has been delete successfully!".colorize(:green)
       @router.navigate_to("/quit-or-home")
     when "2"
-      @router.navigate_to("/")
+      @router.navigate_to("/delete")
     else
       @router.navigate_to('/invalid-option')
     end
@@ -22,21 +22,10 @@ class DeleteContactController < Controller
   def run
     Screen::clear_and_render("Delete Contact\n\n".colorize(:yellow))
     contacts = @db.get_all_contacts
-    if contacts.length == 0
-      Screen::render_view(Views::Contacts::empty)
-    else
-      Views::Contacts::render_all(contacts)
-      option = Screen::get_input(Views::Inputs::enter_option)
-      if not Validator::is_valid_number?(option)
-        @router.navigate_to('/invalid-option')
-      end
-      index = option.to_i
-      if index >= 0 and index < contacts.length
-        self.handle_delete(index)
-      else
-        @router.navigate_to('/input-out-of-range')
-      end
-    end
+    Views::Contacts::render_all(contacts)
+    option = Validator::take_number_within(
+      Views::Inputs::enter_option, -1, contacts.length)
+    self.handle_delete(option.to_i)
     @router.navigate_to('/quit-or-home')
   end
 end

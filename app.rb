@@ -19,14 +19,15 @@ class ContactApplication
 
   def register_paths
     @routes = {
-      '/' => MainController.new(@router),
-      '/add' => AddContactController.new(@router, @db),
-      '/view' => ViewContactController.new(@router, @db),
-      '/edit' => EditContactController.new(@router, @db),
-      '/delete' => DeleteContactController.new(@router, @db),
-      '/invalid-option' => InvalidOptionController.new(@router),
-      '/quit-or-home' => QuitOrHomeController.new(@router),
-      '/input-out-of-range' => InputOutOfRangeController.new(@router)
+      '/' => MainController,
+      '/add' => AddContactController,
+      '/view' => ViewContactController,
+      '/edit' => EditContactController,
+      '/exit' => ExitAppController,
+      '/delete' => DeleteContactController,
+      '/quit-or-home' => QuitOrHomeController,
+      '/invalid-option' => InvalidOptionController,
+      '/input-out-of-range' => InputOutOfRangeController
     }
     @router.register_paths(@routes)
   end

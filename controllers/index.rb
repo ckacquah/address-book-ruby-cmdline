@@ -1,7 +1,9 @@
+require_relative '../db'
+
 class Controller
   attr_reader :router, :db
 
-  def initialize(router, db = nil)
+  def initialize(router, db = DB_CONNECTION)
     @db = db
     @router = router
   end
@@ -42,8 +44,7 @@ class InvalidOptionController < Controller
     option = Screen::get_input(Views::Inputs::enter_option)
     case option
     when "0"
-      puts "Bye Bye!"
-      exit
+      @router.navigate_to("/exit")
     when "1"
       @router.navigate_back
     else
@@ -63,8 +64,7 @@ class InputOutOfRangeController < Controller
     option = Screen::get_input(Views::Inputs::enter_option)
     case option
     when "0"
-      puts "Bye Bye!"
-      exit
+      @router.navigate_to("/exit")
     when "1"
       @router.navigate_back
     else
@@ -78,12 +78,18 @@ class QuitOrHomeController < Controller
     option = Screen::get_input(Views::Menus::quit_or_home)
     case option
     when "0"
-      puts "Bye Bye!".colorize(:green)
-      exit
+      @router.navigate_to("/exit")
     when "1"
       @router.navigate_to("/")
     else
       @router.navigate_to('/invalid-option')
     end
+  end
+end
+
+class ExitAppController < Controller
+  def run
+    Screen::clear_and_render(Views::Headers::exit_header)
+    exit
   end
 end

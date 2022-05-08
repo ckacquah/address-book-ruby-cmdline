@@ -4,10 +4,10 @@ require_relative 'contact'
 
 module Database
 
-  DB_PATH = Config.get_db_path
+  DB_PATH = Config::get_db_path
 
   def self.read_contacts_from_file
-    contacts = Array.new()
+    contacts = Array.new
     begin
       File.open(DB_PATH, "r") do |file|
         file_content = file.read
@@ -18,20 +18,19 @@ module Database
           }
         end
       end
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError
       puts "The database file is empty OR has an invalid format"
     end
     return contacts
   end
 
   def self.write_contacts_to_file(contacts)
-    File.open(DB_PATH, "w") do |file|
-      file.write(JSON.pretty_generate({ 'contacts': contacts }))
-    end
+    File.open(DB_PATH, "w") { |file| file.write(JSON.pretty_generate({ 'contacts': contacts })) }
   end
 end
 
 class ContactDatabase
+
   attr_reader :contacts
 
   def initialize
@@ -43,7 +42,7 @@ class ContactDatabase
   end
 
   def read(index)
-    return @contacts[index]
+    @contacts[index]
   end
 
   def insert(contact)
@@ -61,3 +60,5 @@ class ContactDatabase
     Database::write_contacts_to_file(@contacts)
   end
 end
+
+DB_CONNECTION = ContactDatabase.new

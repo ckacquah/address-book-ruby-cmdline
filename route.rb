@@ -1,6 +1,7 @@
-require_relative 'controllers'
+require_relative 'controllers/index'
 
 class Router
+  
   attr_reader :history, :route_map
 
   def initialize
@@ -43,9 +44,7 @@ class ContactApplicationRouter
   end
 
   def register_paths(routes)
-    routes.each do |path, controller|
-      @router.register_path(path, controller)
-    end
+    routes.each { |path, controller| @router.register_path(path, controller) }
   end
 
   def navigate_to(path)
@@ -54,7 +53,7 @@ class ContactApplicationRouter
     if controller == nil
       puts "No paths found"
     else
-      controller.run
+      controller.new(self).run
     end
   end
 
@@ -62,7 +61,7 @@ class ContactApplicationRouter
     path = @router.get_previous_path
     @router.remove_last_item
     controller = @router.get_controller(path)
-    controller.run
+    controller.new(self).run
   end
 
 end

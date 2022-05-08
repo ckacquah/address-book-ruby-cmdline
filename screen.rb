@@ -1,4 +1,5 @@
 module Screen
+  
   def self.get_input(view)
     self.render_view(view)
     return gets.chomp
