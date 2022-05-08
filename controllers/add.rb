@@ -1,9 +1,11 @@
 class AddContactController < Controller
-
   def get_contact_info
-    first_name = Validator::take_valid_input(Views::Inputs::enter_data("first name"))
-    last_name = Validator::take_valid_input(Views::Inputs::enter_data("last name"))
-    phone = Validator::take_valid_phone(Views::Inputs::enter_contact_number(first_name, last_name))
+    first_name = Validator::take_valid_input(
+      Views::Inputs::enter_data("first name")).capitalize
+    last_name = Validator::take_valid_input(
+      Views::Inputs::enter_data("last name")).capitalize
+    phone = Validator::take_valid_phone(
+      Views::Inputs::enter_contact_number(first_name, last_name))
     Contact.new(first_name, last_name, phone)
   end
 

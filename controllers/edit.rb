@@ -5,8 +5,8 @@ class EditContactController < Controller
       Views::Inputs::enter_data("new first name (#{old_contact.first_name})"))
     last_name = Screen::get_input(
       Views::Inputs::enter_data("new last name (#{old_contact.last_name})"))
-    first_name = first_name == "" ? old_contact.first_name : first_name
-    last_name = last_name == "" ? old_contact.last_name : last_name
+    first_name = first_name == "" ? old_contact.first_name : first_name.capitalize
+    last_name = last_name == "" ? old_contact.last_name : last_name.capitalize
     phone = Screen::get_input(
       Views::Inputs::enter_contact_number(first_name, last_name + " (#{old_contact.phone})"))
     Contact.new(
