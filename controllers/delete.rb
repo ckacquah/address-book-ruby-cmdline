@@ -2,8 +2,7 @@ class DeleteContactController < Controller
   def handle_delete(index)
     contact = @db.read(index)
     Screen::render_view(Views::Contacts::summary(contact))
-    option = Screen::get_input(
-      Views::Inputs::enter_yes_or_no("\nDo you want to delete the contact?"))
+    option = Input::get_yes_or_no("\nDo you want to delete the contact?")
     case option
     when "1"
       @db.delete(index)
@@ -13,7 +12,7 @@ class DeleteContactController < Controller
     when "2"
       @router.navigate_to("/delete")
     else
-      @router.navigate_to('/invalid')
+      @router.display('/invalid')
     end
   end
 
@@ -21,9 +20,8 @@ class DeleteContactController < Controller
     Screen::clear_and_render("Delete Contact\n\n".colorize(:yellow))
     contacts = @db.get_all_contacts
     Views::Contacts::render_all(contacts)
-    option = Validator::take_number_within(
-      Views::Inputs::enter_option, -1, contacts.length)
-    self.handle_delete(option.to_i)
+    index = Input::get_within_range(0, contacts.length - 1)
+    self.handle_delete(index)
     @router.navigate_to("/end")
   end
 end

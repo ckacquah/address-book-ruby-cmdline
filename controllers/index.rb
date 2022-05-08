@@ -25,7 +25,7 @@ class MainMenuController < Controller
     when "4"
       @router.navigate_to("/delete")
     else
-      @router.navigate_to('/invalid')
+      @router.display('/invalid')
     end
   end
 end
@@ -43,6 +43,8 @@ class InvalidOptionController < Controller
     when "0"
       @router.navigate_to("/exit")
     when "1"
+      @router.navigate_to("/")
+    when "2"
       @router.navigate_back
     else
       self.run
@@ -61,7 +63,7 @@ class EndMenuController < Controller
     when "2"
       @router.navigate_back
     else
-      @router.navigate_to('/invalid')
+      @router.display('/invalid')
     end
   end
 end

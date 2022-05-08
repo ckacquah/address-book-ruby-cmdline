@@ -34,25 +34,26 @@ module Views
   end
 
   module Contacts
-    def self.summary(contact, index = nil)
-      if index == nil
-        "\nName: ".colorize(:blue) +
-          "#{contact.first_name} #{contact.last_name}\n".colorize(:yellow) +
-          "Phone Number: #{contact.phone}\n"
-      else
-        "\n(#{index}) Name: #{contact.first_name} #{contact.last_name}\n"\
-        "   Phone Number: #{contact.phone}\n".colorize(:yellow)
-      end
+    def self.summary(contact)
+      "\nSUMMARY\n".colorize(:yellow) +
+        "-------\n" \
+      "Name: ".colorize(:blue) +
+        "#{contact.first_name} #{contact.last_name}\n".colorize(:yellow) +
+        "Phone: ".colorize(:blue) +
+        "#{contact.phone}\n".colorize(:yellow)
     end
 
     def self.render_all(contacts)
       if contacts.length == 0
         Screen::render_view(Views::Contacts::empty)
       end
-      puts "\n---------------------".colorize(:green)
+      Screen::render_view("\n---------------------------\n".colorize(:green))
       contacts.each_with_index do |contact, index|
-        Screen::render_view(Views::Contacts::summary(contact, index))
-        puts "\n---------------------".colorize(:green)
+        Screen::render_view(
+          "(#{index}) Name: #{contact.first_name} #{contact.last_name}\n"\
+        "   Phone: #{contact.phone}\n".colorize(:yellow) +
+            "---------------------------\n".colorize(:green)
+        )
       end
     end
 
@@ -133,5 +134,34 @@ module Views
     def self.empty_input(name)
       "#{name} should not be empty\n".colorize(:red)
     end
+  end
+end
+
+module Input
+  def self.get(name)
+    Screen::get_input(Views::Inputs::enter_data(name))
+  end
+
+  def self.get_with_validator(name)
+    Validator::take_valid_input(Views::Inputs::enter_data(name))
+  end
+
+  def self.get_phone(first_name, last_name)
+    Screen::get_input(
+      Views::Inputs::enter_contact_number(first_name, last_name))
+  end
+
+  def self.get_phone_with_validator(first_name, last_name)
+    Validator::take_valid_phone(
+      Views::Inputs::enter_contact_number(first_name, last_name))
+  end
+
+  def self.get_yes_or_no(question)
+    Screen::get_input(Views::Inputs::enter_yes_or_no(question))
+  end
+
+  def self.get_within_range(start, stop)
+    Validator::take_number_within(
+      Views::Inputs::enter_option, start - 1, stop + 1)
   end
 end

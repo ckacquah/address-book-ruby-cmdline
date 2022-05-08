@@ -1,11 +1,8 @@
 class AddContactController < Controller
   def get_contact_info
-    first_name = Validator::take_valid_input(
-      Views::Inputs::enter_data("first name")).capitalize
-    last_name = Validator::take_valid_input(
-      Views::Inputs::enter_data("last name")).capitalize
-    phone = Validator::take_valid_phone(
-      Views::Inputs::enter_contact_number(first_name, last_name))
+    first_name = Input::get_with_validator("first name").capitalize
+    last_name = Input::get_with_validator("last name").capitalize
+    phone = Input::get_phone_with_validator(first_name, last_name)
     Contact.new(first_name, last_name, phone)
   end
 
@@ -13,8 +10,7 @@ class AddContactController < Controller
     Screen::clear_and_render("Add Contact\n\n".colorize(:yellow))
     contact = get_contact_info
     Screen::render_view(Views::Contacts::summary(contact))
-    option = Screen::get_input(
-      Views::Inputs::enter_yes_or_no("\nDo you want to save the new contact?"))
+    option = Input::get_yes_or_no("\nDo you want to save the new contact?")
     case option
     when "1"
       Screen::clear
@@ -24,7 +20,7 @@ class AddContactController < Controller
     when "2"
       @router.navigate_to("/")
     else
-      @router.navigate_to('/invalid')
+      @router.display('/invalid')
     end
   end
 end

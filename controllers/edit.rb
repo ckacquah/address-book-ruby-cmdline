@@ -1,14 +1,11 @@
 class EditContactController < Controller
 
   def get_updated_contact_info(old_contact)
-    first_name = Screen::get_input(
-      Views::Inputs::enter_data("new first name (#{old_contact.first_name})"))
-    last_name = Screen::get_input(
-      Views::Inputs::enter_data("new last name (#{old_contact.last_name})"))
+    first_name = Input::get("new first name (#{old_contact.first_name})")
+    last_name = Input::get("new last name (#{old_contact.last_name})")
     first_name = first_name == "" ? old_contact.first_name : first_name.capitalize
     last_name = last_name == "" ? old_contact.last_name : last_name.capitalize
-    phone = Screen::get_input(
-      Views::Inputs::enter_contact_number(first_name, last_name + " (#{old_contact.phone})"))
+    phone = Input::get_phone(first_name, last_name + " (#{old_contact.phone})")
     Contact.new(
       first_name, last_name,
       phone == "" ? old_contact.phone : phone
@@ -19,8 +16,7 @@ class EditContactController < Controller
     old_contact = @db.read(index)
     contact = get_updated_contact_info(old_contact)
     Screen::render_view(Views::Contacts::summary(contact))
-    option = Screen::get_input(
-      Views::Inputs::enter_yes_or_no("\nDo you want to update the contact?"))
+    option = Input::get_yes_or_no("\nDo you want to update the contact?")
     case option
     when "1"
       @db.update(index, contact)
@@ -29,7 +25,7 @@ class EditContactController < Controller
     when "2"
       @router.navigate_to("/end")
     else
-      @router.navigate_to('/invalid')
+      @router.display('/invalid')
     end
   end
 
@@ -37,8 +33,7 @@ class EditContactController < Controller
     Screen::clear_and_render("Edit Contact\n\n".colorize(:yellow))
     contacts = @db.get_all_contacts
     Views::Contacts::render_all(contacts)
-    option = Validator::take_number_within(
-      Views::Inputs::enter_option, -1, contacts.length)
-    self.handle_edit(option.to_i)
+    index = Input::get_within_range(0, contacts.length - 1)
+    self.handle_edit(index)
   end
 end
