@@ -1,18 +1,9 @@
-class Router
+class History
 
-  attr_reader :history, :route_map
+  attr_reader :history
 
   def initialize
     @history = []
-    @route_map = {}
-  end
-
-  def register_path(path, action)
-    @route_map[path] = action
-  end
-
-  def get_controller(path)
-    @route_map[path]
   end
 
   def push_path(path)
@@ -27,27 +18,28 @@ class Router
     @history = []
   end
 
-  def remove_last_item
+  def remove_last_path
     @history.pop
   end
+
 end
 
-class ContactApplicationRouter
+class Router
 
-  attr_reader :router
+  attr_reader :history, :routes
 
   def initialize(routes = {})
-    @router = Router.new
-    self.register_paths(routes)
+    @history = History.new
+    @routes = routes
   end
 
   def register_paths(routes)
-    routes.each { |path, controller| @router.register_path(path, controller) }
+    routes.each { |path, controller| @routes[path] = controller }
   end
 
   def navigate_to(path)
-    @router.push_path(path)
-    controller = @router.get_controller(path)
+    @history.push_path(path)
+    controller = @routes[path]
     if controller == nil
       puts "No paths found"
     else
@@ -56,9 +48,14 @@ class ContactApplicationRouter
   end
 
   def navigate_back
-    path = @router.get_previous_path
-    @router.remove_last_item
-    controller = @router.get_controller(path)
+    path = @history.get_previous_path
+    @history.remove_last_path
+    controller = @routes[path]
+    controller.new(self).run
+  end
+
+  def display(path)
+    controller = @routes[path]
     controller.new(self).run
   end
 

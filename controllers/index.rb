@@ -33,7 +33,7 @@ end
 class InvalidOptionController < Controller
   def display_menu
     Screen::clear_and_render(Views::Errors::invalid_option)
-    Screen::render_view(Views::Menus::quit_or_back)
+    Screen::render_view(Views::Menus::quit_home_back)
   end
 
   def run
@@ -53,7 +53,7 @@ end
 class InputOutOfRangeController < Controller
   def display_menu
     Screen::clear_and_render(Views::Errors::option_out_of_range)
-    Screen::render_view(Views::Menus::quit_or_back)
+    Screen::render_view(Views::Menus::quit_home_back)
   end
 
   def run
@@ -70,14 +70,16 @@ class InputOutOfRangeController < Controller
   end
 end
 
-class QuitOrHomeController < Controller
+class EndMenuController < Controller
   def run
-    option = Screen::get_input(Views::Menus::quit_or_home)
+    option = Screen::get_input(Views::Menus::quit_home_back)
     case option
     when "0"
       @router.navigate_to("/exit")
     when "1"
       @router.navigate_to("/")
+    when "2"
+      @router.navigate_back
     else
       @router.navigate_to('/invalid-option')
     end

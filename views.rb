@@ -67,7 +67,7 @@ module Views
 
     def self.main
       Views::Headers::welcome_header +
-        "Select an option\n".colorize(:yellow) +
+        "\nSelect an option\n".colorize(:yellow) +
         " (1) Add contact\n"\
                 " (2) Edit contact\n"\
                 " (3) View contacts\n"\
@@ -75,15 +75,16 @@ module Views
         Views::Inputs::enter_option
     end
 
-    def self.quit_or_back
-      "Select an option\n".colorize(:yellow) +
+    def self.quit_home_back
+      "\nSelect an option\n".colorize(:yellow) +
         " (0) Quit\n"\
-                " (1) Back\n\n".colorize(:red) +
+        " (1) Home\n"\
+                " (2) Back\n\n".colorize(:red) +
         Views::Inputs::enter_option
     end
 
     def self.quit_or_home
-      "Select an option\n".colorize(:yellow) +
+      "\nSelect an option\n".colorize(:yellow) +
         " (0) Quit\n"\
                 " (1) Home\n\n".colorize(:red) +
         Views::Inputs::enter_option
@@ -102,7 +103,7 @@ module Views
     end
 
     def self.enter_option
-      "Please select from the options above: ".colorize(:blue)
+      "Option: ".colorize(:blue)
     end
 
     def self.enter_data(name)

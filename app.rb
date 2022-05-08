@@ -23,7 +23,7 @@ class AddressBookApplication
 
   def initialize
     @db = ContactDatabase.new
-    @router = ContactApplicationRouter.new({})
+    @router = Router.new
     self.register_paths
   end
 
@@ -31,11 +31,11 @@ class AddressBookApplication
     @routes = {
       '/' => MainMenuController,
       '/add' => AddContactController,
+      '/end' => EndMenuController,
       '/view' => ViewContactController,
       '/edit' => EditContactController,
       '/exit' => ExitAppController,
       '/delete' => DeleteContactController,
-      '/quit-or-home' => QuitOrHomeController,
       '/invalid-option' => InvalidOptionController,
       '/input-out-of-range' => InputOutOfRangeController
     }

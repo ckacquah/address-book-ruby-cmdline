@@ -18,7 +18,7 @@ class AddContactController < Controller
       Screen::clear
       @db.insert(contact)
       puts "Contact saved successfully!".colorize(:green)
-      @router.navigate_to("/quit-or-home")
+      @router.navigate_to("/end")
     when "2"
       @router.navigate_to("/")
     else

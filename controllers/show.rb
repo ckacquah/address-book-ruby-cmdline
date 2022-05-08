@@ -3,6 +3,6 @@ class ViewContactController < Controller
     Screen::clear_and_render("View Contacts\n\n".colorize(:yellow))
     contacts = @db.get_all_contacts
     Views::Contacts::render_all(contacts)
-    @router.navigate_to('/quit-or-home')
+    @router.display('/end')
   end
 end

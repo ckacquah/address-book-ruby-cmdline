@@ -1,5 +1,7 @@
 class DeleteContactController < Controller
   def handle_delete(index)
+    contact = @db.read(index)
+    Screen::render_view(Views::Contacts::summary(contact))
     option = Screen::get_input(
       Views::Inputs::enter_yes_or_no("\nDo you want to delete the contact?"))
     case option
@@ -7,7 +9,7 @@ class DeleteContactController < Controller
       @db.delete(index)
       Screen::clear
       puts "Contact has been deleted successfully!".colorize(:green)
-      @router.navigate_to("/quit-or-home")
+      @router.navigate_to("/end")
     when "2"
       @router.navigate_to("/delete")
     else
@@ -22,6 +24,6 @@ class DeleteContactController < Controller
     option = Validator::take_number_within(
       Views::Inputs::enter_option, -1, contacts.length)
     self.handle_delete(option.to_i)
-    @router.navigate_to('/quit-or-home')
+    @router.navigate_to("/end")
   end
 end
