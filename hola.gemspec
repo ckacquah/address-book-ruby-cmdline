@@ -4,6 +4,5 @@ Gem::Specification.new do |s|
   s.summary = "Models storage cmdline application"
   s.description = "A simple program to store phone contacts into an address book."
   s.authors = ["Cyril Acquah"]
-  s.files = ["lib/config.rb"]
   s.license = 'MIT'
 end
