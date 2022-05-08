@@ -17,6 +17,17 @@ require_relative 'controllers/edit'
 require_relative 'controllers/show'
 require_relative 'controllers/delete'
 
+ROUTES = {
+  '/' => MainMenuController,
+  '/add' => AddContactController,
+  '/end' => EndMenuController,
+  '/view' => ViewContactController,
+  '/edit' => EditContactController,
+  '/exit' => ExitAppController,
+  '/delete' => DeleteContactController,
+  '/invalid' => InvalidOptionController,
+}
+
 class AddressBookApplication
 
   attr_reader :routes, :router, :db
@@ -24,21 +35,7 @@ class AddressBookApplication
   def initialize
     @db = ContactDatabase.new
     @router = Router.new
-    self.register_paths
-  end
-
-  def register_paths
-    @routes = {
-      '/' => MainMenuController,
-      '/add' => AddContactController,
-      '/end' => EndMenuController,
-      '/view' => ViewContactController,
-      '/edit' => EditContactController,
-      '/exit' => ExitAppController,
-      '/delete' => DeleteContactController,
-      '/invalid' => InvalidOptionController,
-    }
-    @router.register_paths(@routes)
+    @router.register_paths(ROUTES)
   end
 
   def start
