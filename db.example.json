@@ -1,0 +1,9 @@
+{
+  "contacts": [
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "phone": "0987654321"
+    }
+  ]
+}
