@@ -8,13 +8,8 @@ class Controller
 end
 
 class MainController < Controller
-  def display_menu
-    Screen::clear_and_render(Views::Menus::main)
-    Screen::render_view(Views::Inputs::enter_option)
-  end
-
   def run
-    self.display_menu
+    Screen::clear_and_render(Views::Menus::main)
     option = gets.chomp
     case option
     when "1"
@@ -32,13 +27,8 @@ class MainController < Controller
 end
 
 class InvalidOptionController < Controller
-  def display_menu
-    Screen::clear_and_render(Views::Errors::invalid_option)
-    Screen::render_view(Views::Menus::quit_or_back)
-  end
-
   def run
-    self.display_menu
+    Screen::clear_and_render(Views::Errors::invalid_option)
     option = Screen::get_input(Views::Inputs::enter_option)
     case option
     when "0"

@@ -6,9 +6,8 @@ module Database
     contacts = Array.new
     begin
       File.open(DB_PATH, "r") do |file|
-        file_content = file.read
-        db_content = JSON.parse(file_content)
-        if db_content.has_key?('contacts')
+        db_content = JSON.parse(file.read)
+        if db_content.has_key?('contacts') then
           db_content['contacts'].each { |contact_dict|
             contacts.append(Contact.from_dict(contact_dict))
           }

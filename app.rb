@@ -14,7 +14,7 @@ require_relative 'validator'
 require_relative 'controllers/index'
 require_relative 'controllers/add'
 require_relative 'controllers/edit'
-require_relative 'controllers/view'
+require_relative 'controllers/show'
 require_relative 'controllers/delete'
 
 class AddressBookApplication

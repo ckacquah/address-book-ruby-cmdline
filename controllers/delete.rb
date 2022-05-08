@@ -6,7 +6,7 @@ class DeleteContactController < Controller
     when "1"
       @db.delete(index)
       Screen::clear
-      puts "Contact has been delete successfully!".colorize(:green)
+      puts "Contact has been deleted successfully!".colorize(:green)
       @router.navigate_to("/quit-or-home")
     when "2"
       @router.navigate_to("/delete")
