@@ -1,13 +1,16 @@
+require_relative '../views/index'
+
 class Controller
   attr_reader :router, :db
 
-  def initialize(router, db = DB_CONNECTION)
+  def initialize(router = APP_ROUTER, db = DB_CONNECTION)
     @db = db
     @router = router
   end
 end
 
 class MainMenuController < Controller
+
   def display_menu
     Screen::clear_and_render(Views::Menus::main)
   end
@@ -25,12 +28,14 @@ class MainMenuController < Controller
     when "4"
       @router.navigate_to("/delete")
     else
-      @router.display('/invalid')
+      @router.navigate_to('/invalid')
     end
   end
+
 end
 
 class InvalidOptionController < Controller
+
   def display_menu
     Screen::clear_and_render(Views::Errors::invalid_option)
     Screen::render_view(Views::Menus::quit_home_back)
@@ -50,6 +55,7 @@ class InvalidOptionController < Controller
       self.run
     end
   end
+
 end
 
 class EndMenuController < Controller
@@ -63,7 +69,7 @@ class EndMenuController < Controller
     when "2"
       @router.navigate_back
     else
-      @router.display('/invalid')
+      @router.navigate_to('/invalid')
     end
   end
 end

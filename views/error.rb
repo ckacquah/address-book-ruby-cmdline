@@ -18,5 +18,7 @@ module Views
     def self.empty_input(name)
       "#{name} should not be empty\n".colorize(:red)
     end
+    
   end
+
 end

@@ -6,9 +6,7 @@ class AddContactController < Controller
     Contact.new(first_name, last_name, phone)
   end
 
-  def run
-    Screen::clear_and_render("Add Contact\n\n".colorize(:yellow))
-    contact = get_contact_info
+  def handle_add(contact)
     Screen::render_view(Views::Contacts::summary(contact))
     option = Input::get_yes_or_no("\nDo you want to save the new contact?")
     case option
@@ -18,9 +16,16 @@ class AddContactController < Controller
       puts "Contact saved successfully!".colorize(:green)
       @router.navigate_to("/end")
     when "2"
-      @router.navigate_to("/")
+      @router.navigate_to("/end")
     else
-      @router.display('/invalid')
+      Screen::clear_and_render(Views::Errors::invalid_option)
+      self.handle_add(contact)
     end
+  end
+
+  def run
+    Screen::clear_and_render("Add Contact\n\n".colorize(:yellow))
+    contact = get_contact_info
+    self.handle_add(contact)
   end
 end

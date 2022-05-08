@@ -51,6 +51,7 @@ module Validator
   end
 
   def self.is_valid_phone?(input)
-    self.is_valid_number?(input) and input.length == 10
+    self.is_valid_input?(input) and \
+      /^\+?\(?((233)|0)?\)?[-.\s]?\d{2}[-.\s]?\d{3}[-.\s]?\d{4}?$/.match?(input)
   end
 end
