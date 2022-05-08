@@ -1,7 +1,3 @@
-require 'json'
-require_relative 'config'
-require_relative 'contact'
-
 module Database
 
   DB_PATH = Config::get_db_path

@@ -1,5 +1,15 @@
+require 'json'
+require 'dotenv'
+require 'colorize'
+
+require_relative 'config'
+require_relative 'contact'
 require_relative 'db'
+
 require_relative 'route'
+require_relative 'views'
+require_relative 'screen'
+require_relative 'validator'
 
 require_relative 'controllers/index'
 require_relative 'controllers/add'

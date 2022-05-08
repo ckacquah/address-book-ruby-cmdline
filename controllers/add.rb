@@ -1,8 +1,3 @@
-require_relative 'index'
-require_relative '../views'
-require_relative '../screen'
-require_relative '../validator'
-
 class AddContactController < Controller
 
   def get_contact_info

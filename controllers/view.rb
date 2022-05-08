@@ -1,7 +1,3 @@
-require_relative 'index'
-require_relative '../screen'
-require_relative '../views'
-
 class ViewContactController < Controller
   def run
     Screen::clear_and_render("View Contacts\n\n".colorize(:yellow))

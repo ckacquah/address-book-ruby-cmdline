@@ -1,5 +1,3 @@
-require_relative 'screen'
-
 module Validator
 
   def self.take_valid_input(view)

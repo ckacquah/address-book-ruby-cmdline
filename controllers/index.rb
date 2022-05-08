@@ -1,5 +1,3 @@
-require_relative '../db'
-
 class Controller
   attr_reader :router, :db
 

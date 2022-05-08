@@ -1,7 +1,5 @@
-require_relative 'controllers/index'
-
 class Router
-  
+
   attr_reader :history, :route_map
 
   def initialize

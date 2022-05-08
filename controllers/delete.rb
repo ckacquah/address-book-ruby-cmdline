@@ -1,7 +1,3 @@
-require_relative 'index'
-require_relative '../screen'
-require_relative '../views'
-
 class DeleteContactController < Controller
   def handle_delete(index)
     option = Screen::get_input(

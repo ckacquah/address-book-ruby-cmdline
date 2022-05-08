@@ -1,7 +1,3 @@
-require_relative 'index'
-require_relative '../screen'
-require_relative '../views'
-
 class EditContactController < Controller
 
   def get_updated_contact_info(old_contact)
