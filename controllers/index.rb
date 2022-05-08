@@ -7,10 +7,14 @@ class Controller
   end
 end
 
-class MainController < Controller
-  def run
+class MainMenuController < Controller
+  def display_menu
     Screen::clear_and_render(Views::Menus::main)
-    option = gets.chomp
+  end
+
+  def run
+    display_menu
+    option = Screen::get_input
     case option
     when "1"
       @router.navigate_to('/add')
@@ -27,9 +31,14 @@ class MainController < Controller
 end
 
 class InvalidOptionController < Controller
-  def run
+  def display_menu
     Screen::clear_and_render(Views::Errors::invalid_option)
-    option = Screen::get_input(Views::Inputs::enter_option)
+    Screen::render_view(Views::Menus::quit_or_back)
+  end
+
+  def run
+    display_menu
+    option = Screen::get_input
     case option
     when "0"
       @router.navigate_to("/exit")
@@ -48,8 +57,8 @@ class InputOutOfRangeController < Controller
   end
 
   def run
-    self.display_menu
-    option = Screen::get_input(Views::Inputs::enter_option)
+    display_menu
+    option = Screen::get_input
     case option
     when "0"
       @router.navigate_to("/exit")

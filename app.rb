@@ -29,7 +29,7 @@ class AddressBookApplication
 
   def register_paths
     @routes = {
-      '/' => MainController,
+      '/' => MainMenuController,
       '/add' => AddContactController,
       '/view' => ViewContactController,
       '/edit' => EditContactController,
