@@ -34,6 +34,7 @@ module Views
   end
 
   module Contacts
+
     def self.summary(contact)
       "\nSUMMARY\n".colorize(:yellow) +
         "-------\n" \
@@ -130,6 +131,7 @@ module Views
 end
 
 module Input
+
   def self.get(name)
     Screen::get_input(Views::Inputs::enter_data(name))
   end
@@ -153,7 +155,7 @@ module Input
   end
 
   def self.get_within_range(start, stop)
-    Validator::take_number_within(
+    Validator::take_number_between(
       Views::Inputs::enter_option, start - 1, stop + 1)
   end
 end

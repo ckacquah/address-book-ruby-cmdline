@@ -18,7 +18,7 @@ module Validator
     input
   end
 
-  def self.take_number_within(view, start_index, end_index)
+  def self.take_number_between(view, start_index, end_index)
     input = Screen::get_input(view)
     until self.is_within_range?(input, start_index, end_index)
       Screen::render_view(

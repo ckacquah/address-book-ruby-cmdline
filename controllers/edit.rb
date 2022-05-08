@@ -1,11 +1,12 @@
 class EditContactController < Controller
 
   def get_updated_contact_info(old_contact)
-    first_name = Input::get("new first name (#{old_contact.first_name})")
-    last_name = Input::get("new last name (#{old_contact.last_name})")
-    first_name = first_name == "" ? old_contact.first_name : first_name.capitalize
-    last_name = last_name == "" ? old_contact.last_name : last_name.capitalize
-    phone = Input::get_phone(first_name, last_name + " (#{old_contact.phone})")
+    first_name = Input::get("new first name (#{old_contact.first_name})").capitalize
+    last_name = Input::get("new last name (#{old_contact.last_name})").capitalize
+    phone = Input::get_phone(
+      first_name == "" ? old_contact.first_name : first_name,
+      last_name == "" ? old_contact.last_name : last_name + \
+      " (#{old_contact.phone})")
     Contact.new(
       first_name, last_name,
       phone == "" ? old_contact.phone : phone
