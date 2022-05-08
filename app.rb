@@ -36,8 +36,7 @@ class AddressBookApplication
       '/edit' => EditContactController,
       '/exit' => ExitAppController,
       '/delete' => DeleteContactController,
-      '/invalid-option' => InvalidOptionController,
-      '/input-out-of-range' => InputOutOfRangeController
+      '/invalid' => InvalidOptionController,
     }
     @router.register_paths(@routes)
   end

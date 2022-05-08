@@ -24,7 +24,7 @@ class AddContactController < Controller
     when "2"
       @router.navigate_to("/")
     else
-      @router.navigate_to('/invalid-option')
+      @router.navigate_to('/invalid')
     end
   end
 end

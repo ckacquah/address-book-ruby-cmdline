@@ -13,7 +13,7 @@ class DeleteContactController < Controller
     when "2"
       @router.navigate_to("/delete")
     else
-      @router.navigate_to('/invalid-option')
+      @router.navigate_to('/invalid')
     end
   end
 

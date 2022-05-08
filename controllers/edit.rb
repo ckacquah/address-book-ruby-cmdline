@@ -29,7 +29,7 @@ class EditContactController < Controller
     when "2"
       @router.navigate_to("/end")
     else
-      @router.navigate_to('/invalid-option')
+      @router.navigate_to('/invalid')
     end
   end
 
